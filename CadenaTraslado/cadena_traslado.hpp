@@ -6,15 +6,15 @@
 #include <memory>
 #include <Carro/carro.hpp>
 
-class CadenaDeTraslado1A2
+class CadenaDeTraslado
 {
 private:
     std::queue<std::unique_ptr<Carro>> cadena_traslado;
     std::mutex mux;
 
 public:
-    CadenaDeTraslado1A2();
-    ~CadenaDeTraslado1A2();
+    CadenaDeTraslado();
+    ~CadenaDeTraslado();
 
     void insertar_carro(std::unique_ptr<Carro>);
     std::unique_ptr<Carro> obtener_carro_actual();
