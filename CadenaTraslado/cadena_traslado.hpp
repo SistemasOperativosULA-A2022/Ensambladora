@@ -1,5 +1,5 @@
-#ifndef CADENA_DE_TRASLADO_HEADER
-#define CADENA_DE_TRASLADO_HEADER
+#ifndef __CADENA_DE_TRASLADO_HEADER__
+#define __CADENA_DE_TRASLADO_HEADER__
 
 #include <queue>
 #include <mutex>
@@ -20,4 +20,4 @@ public:
     std::unique_ptr<Carro> obtener_carro_actual();
 };
 
-#endif // CADENA_DE_TRASLADO_HEADER
+#endif // __CADENA_DE_TRASLADO_HEADER__

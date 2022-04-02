@@ -1,5 +1,5 @@
-#ifndef ESTACION_1_HEADER
-#define ESTACION_1_HEADER
+#ifndef __ESTACION_1_HEADER__
+#define __ESTACION_1_HEADER__
 
 #include <chrono>
 #include <random>
@@ -16,4 +16,4 @@ public:
     ~Estacion1();
 };
 
-#endif // ESTACION_1_HEADER
+#endif // __ESTACION_1_HEADER__
