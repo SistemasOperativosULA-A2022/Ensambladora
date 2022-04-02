@@ -26,13 +26,12 @@ int main(int argc, char const *argv[])
     std::thread proceso_estacion_1(&Estacion1::worker, &estacion1);
     std::thread consumidor_cadena(&consumer, cadena_traslado_1a2);
 
-    std::cout << "Press Ctrl+D to exit. \n";
+    std::cout << "Press Ctrl+C to exit. \n";
 
     if (proceso_estacion_1.joinable())
         proceso_estacion_1.join();
     if (consumidor_cadena.joinable())
         proceso_estacion_1.join();
-    while (std::cin);
 
     return 0;
 }
