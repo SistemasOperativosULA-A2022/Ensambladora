@@ -4,10 +4,6 @@ Carro::Carro(long long id) : id{id}
 {
 }
 
-Carro::~Carro()
-{
-}
-
 void Carro::set_volume(int volume)
 {
     this->mux.lock();

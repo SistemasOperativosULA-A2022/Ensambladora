@@ -11,7 +11,7 @@ CadenaDeTraslado::~CadenaDeTraslado()
 void CadenaDeTraslado::insertar_carro(std::unique_ptr<Carro> carro)
 {
     this->mux.lock();
-    this->cadena_traslado.push(carro);
+    this->cadena_traslado.push(std::move(carro));
     this->mux.unlock();
 }
 

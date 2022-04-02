@@ -1,6 +1,8 @@
 #ifndef __CARRO_HEADER__
 #define __CARRO_HEADER__
 
+#include <mutex>
+
 class Carro
 {
 private:
@@ -14,8 +16,10 @@ private:
     std::mutex mux;
 
 public:
+    Carro() = delete;
+    Carro(const Carro &) = delete;
     Carro(long long);
-    ~Carro();
+    ~Carro() = default;
 
     void set_volume(int);
     void set_num_doors(int);
@@ -34,4 +38,4 @@ public:
     
 };
 
-#endif __CARRO_HEADER__
+#endif //__CARRO_HEADER__
