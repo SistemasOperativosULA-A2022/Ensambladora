@@ -13,8 +13,8 @@ private:
     std::mutex mux;
 
 public:
-    CadenaDeTraslado();
-    ~CadenaDeTraslado();
+    CadenaDeTraslado() = default;
+    ~CadenaDeTraslado() = default;
 
     void insertar_carro(std::unique_ptr<Carro>);
     std::unique_ptr<Carro> obtener_carro_actual();

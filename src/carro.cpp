@@ -46,6 +46,11 @@ void Carro::set_seats_model(int seats_model)
     this->mux.unlock();
 }
 
+long long Carro::get_id()
+{
+    return this->id;
+}
+
 int Carro::get_volume()
 {
     return this->volume;

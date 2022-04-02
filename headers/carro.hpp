@@ -28,6 +28,7 @@ public:
     void set_motor_model(int);
     void set_seats_model(int);
 
+    long long get_id();
     int get_volume();
     int get_num_doors();
     int get_color();

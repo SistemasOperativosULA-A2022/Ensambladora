@@ -18,8 +18,8 @@ private:
 
 public:
     Estacion1(unsigned, double, double, double, std::shared_ptr<CadenaDeTraslado>);
-    ~Estacion1();
-    Estacion1() = default;
+    ~Estacion1() = default;
+    Estacion1() = delete;
 
     void worker();
 };
