@@ -2,8 +2,8 @@
 #include <iostream>
 
 static double L1 = 3.0;
-static double M1 = 0.5;
-static double D1 = 1.0;
+static double M1 = 5;
+static double D1 = 2.5;
 
 void consumer(std::shared_ptr<CadenaDeTraslado> cadena)
 {

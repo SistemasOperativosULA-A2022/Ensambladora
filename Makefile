@@ -8,7 +8,7 @@ HEADERS=$(FILES:%=$(HEADER_PATH)/%.hpp)
 EXEC=main
 
 CC=g++
-CFLAGS=-Wall
+CFLAGS=-Wall -std=c++14
 LINKS=-lpthread
 
 all:
