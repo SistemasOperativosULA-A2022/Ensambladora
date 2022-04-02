@@ -1,3 +1,10 @@
+/**
+ * @file cadena_traslado.hpp
+ * @author Jorge Luis Rodríguez González (egroj97@gmail.com)
+ * @version 0.1
+ * @date 2022-04-02
+ */
+
 #ifndef __ESTACION_1_HEADER__
 #define __ESTACION_1_HEADER__
 

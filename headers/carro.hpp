@@ -1,3 +1,10 @@
+/**
+ * @file cadena_traslado.hpp
+ * @author Jorge Luis Rodríguez González (egroj97@gmail.com)
+ * @version 0.1
+ * @date 2022-04-02
+ */
+
 #ifndef __CARRO_HEADER__
 #define __CARRO_HEADER__
 
