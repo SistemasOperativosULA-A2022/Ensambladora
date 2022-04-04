@@ -24,15 +24,15 @@ Estacion2::Estacion2(
 
 /**
  * @brief Hilo infinito que duerme el intervalo de segundo obtenido a través de
- * la distriubción normal (tiempo de procesamiento), se procede a la colocacion
- * de los asientos de los carros llegados de la estacion 3.
+ * la distriubción normal (tiempo de procesamiento), se procede a pintar
+ * los carros llegados de la estacion 2.
  */
 void Estacion2::ejecutar()
 {
     while (true)
     {
         auto carro = std::move(cadena_traslado->obtener_carro_actual());
-        auto volumen = 600;
+        // auto volumen = 600;
 
         if (carro != nullptr)
         {
@@ -45,7 +45,7 @@ void Estacion2::ejecutar()
 
             carro->set_color(generador() % 11); // del 0 a 11 son los posibles colores que puede tener el carro
 
-            carro->set_car_model(volumen > 900? 0 : 1); // 0 es coupe, 1 es sedan
+            // carro->set_car_model(volumen > 900? 0 : 1); // 0 es coupe, 1 es sedan
 
             std::cerr << "Saliendo de la Estacion 2 el carro con ID:" << carro->get_id() << '\n';
             std::cerr << "Color=: " << carro->get_color() << '\n';
