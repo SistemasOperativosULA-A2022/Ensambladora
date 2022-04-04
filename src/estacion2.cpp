@@ -40,19 +40,20 @@ void Estacion2::ejecutar()
         {
             double intervalo_procesamiento = tiempo_procesamiento(generador);
 
-            std::cerr << "Llego a la Estacion 2 el carro con ID: " << carro->get_id() << '\n';
-            std::cerr << "Tiempo de procesamiento Estacion 2 carro con ID " << carro->get_id() << ": " << intervalo_procesamiento << '\n';
+            std::cerr << "Llego a la Estacion2 el carro con ID: " << carro->get_id() << '\n';
+            std::cerr << "Tiempo de procesamiento Estacion2 " << carro->get_id() << ": " << intervalo_procesamiento << '\n';
 
             std::this_thread::sleep_for(std::chrono::seconds(int(intervalo_procesamiento) + 1));
 
             carro->set_color(generador() % 11); // del 0 a 11 son los posibles colores que puede tener el carro
-
+            carro->set_car_model(1);
             // carro->set_car_model(volumen > 900? 0 : 1); // 0 es coupe, 1 es sedan
 
-            std::cerr << "Saliendo de la Estacion 2 el carro con ID:" << carro->get_id() << '\n';
-            std::cerr << "Color=: " << carro->get_color() << '\n';
-            std::cerr << "Modelo= " << carro->get_car_model() << '\n';
+            std::cerr << "Saliendo de la Estacion 2 el carro con ID: " << carro->get_id() << '\n';
+            std::cerr << "Color = " << carro->get_color() << '\n';
+            std::cerr << "Modelo = " << carro->get_car_model() << '\n';
 
+            cadena_traslado_2a3->insertar_log("Completado correctamente Estacion2 carro con ID: " + carro->get_id());
             cadena_traslado_2a3->insertar_carro(std::move(carro));
         }
     }

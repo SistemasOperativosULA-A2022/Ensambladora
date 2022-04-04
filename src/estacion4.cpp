@@ -49,8 +49,6 @@ void Estacion4::ejecutar()
             std::cerr << "Modelo= " << carro->get_car_model() << '\n';
             std::cerr << "Motor=: " << carro->get_motor_model() << '\n';
             std::cerr << "Asientos= " << seats_model[carro->get_seats_model()]<< '\n';
-            
-            
         }
     }
 }

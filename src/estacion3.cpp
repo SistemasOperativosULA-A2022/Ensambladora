@@ -46,10 +46,11 @@ void Estacion3::worker()
 
             // Modifica carro aquí
 
-            std::cerr << "Saliendo de la Estacion 2 el carro con ID:" << carro->get_id() << '\n';
+            std::cerr << "Saliendo de la Estacion 3 el carro con ID:" << carro->get_id() << '\n';
             std::cerr << "Color=: " << carro->get_color() << '\n';
             std::cerr << "Modelo= " << carro->get_car_model() << '\n';
-
+            ;
+            cadena_traslado_3a4->insertar_log("Completado correctamente Estacion3 carro con ID: " + carro->get_id());
             cadena_traslado_3a4->insertar_carro(std::move(carro));
         }
     }
