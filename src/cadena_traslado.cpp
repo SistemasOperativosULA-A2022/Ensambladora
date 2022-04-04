@@ -20,3 +20,24 @@ std::unique_ptr<Carro> CadenaDeTraslado::obtener_carro_actual()
 
     return value;
 }
+
+void CadenaDeTraslado::insertar_log(std::string cadena)
+{
+    this->logs_mux.lock();
+    this->logs.push(cadena);
+    this->logs_mux.unlock();
+}
+
+std::string CadenaDeTraslado::obtener_log()
+{
+    std::string value = "";
+    if (not this->logs.empty())
+    {
+        this->mux.lock();
+        value = this->logs.front();
+        this->logs.pop();
+        this->mux.unlock();
+    }
+
+    return value;
+}
