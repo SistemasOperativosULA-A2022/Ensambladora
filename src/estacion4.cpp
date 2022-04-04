@@ -45,10 +45,6 @@ void Estacion4::ejecutar()
             carro->set_seats_model(generador()%2); // 0 son asientos de tela, 1 son asientos de cuero
             
             std::cerr << "Saliendo de la Estacion 4 el carro con ID:" << carro->get_id() << '\n';
-            std::cerr << "Color=: " << carro->get_color() << '\n';
-            std::cerr << "Modelo= " << carro->get_car_model() << '\n';
-            std::cerr << "Motor=: " << carro->get_motor_model() << '\n';
-            std::cerr << "Asientos= " << seats_model[carro->get_seats_model()]<< '\n';
         }
     }
 }

@@ -50,8 +50,6 @@ void Estacion2::ejecutar()
             // carro->set_car_model(volumen > 900? 0 : 1); // 0 es coupe, 1 es sedan
 
             std::cerr << "Saliendo de la Estacion 2 el carro con ID: " << carro->get_id() << '\n';
-            std::cerr << "Color = " << carro->get_color() << '\n';
-            std::cerr << "Modelo = " << carro->get_car_model() << '\n';
 
             cadena_traslado_2a3->insertar_log("Completado correctamente Estacion2 carro con ID: " + carro->get_id());
             cadena_traslado_2a3->insertar_carro(std::move(carro));
