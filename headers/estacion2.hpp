@@ -17,10 +17,12 @@ class Estacion2
 private:
     std::mt19937 generador;
     std::normal_distribution<double> tiempo_procesamiento;
-    std::shared_ptr<CadenaDeTraslado> cadena_traslado;
+    std::shared_ptr<CadenaDeTraslado> cadena_traslado_1a2;
+    std::shared_ptr<CadenaDeTraslado> cadena_traslado_2a3;
 public:
     Estacion2() = default;
-    Estacion2(double seed, double M2, double D2, std::shared_ptr<CadenaDeTraslado> c);
+    Estacion2(unsigned, double, double, std::shared_ptr<CadenaDeTraslado>, 
+    std::shared_ptr<CadenaDeTraslado>);
     ~Estacion2() = default;
     
     void ejecutar();

@@ -11,12 +11,14 @@
  * @param carro Carro recibido desde la estacion 1
  */
 Estacion2::Estacion2(
-    double seed,
+    unsigned seed,
     double M2,
     double D2,
-    std::shared_ptr<CadenaDeTraslado> c) : generador(seed),
-                                           tiempo_procesamiento(M2, D2),
-                                           cadena_traslado(c)
+    std::shared_ptr<CadenaDeTraslado> c1a2,
+    std::shared_ptr<CadenaDeTraslado> c2a3) : generador(seed),
+                                              tiempo_procesamiento(M2, D2),
+                                              cadena_traslado_1a2(c1a2),
+                                              cadena_traslado_2a3(c2a3)
 
 {
     // empty
@@ -31,7 +33,7 @@ void Estacion2::ejecutar()
 {
     while (true)
     {
-        auto carro = std::move(cadena_traslado->obtener_carro_actual());
+        auto carro = std::move(cadena_traslado_1a2->obtener_carro_actual());
         // auto volumen = 600;
 
         if (carro != nullptr)
@@ -50,6 +52,8 @@ void Estacion2::ejecutar()
             std::cerr << "Saliendo de la Estacion 2 el carro con ID:" << carro->get_id() << '\n';
             std::cerr << "Color=: " << carro->get_color() << '\n';
             std::cerr << "Modelo= " << carro->get_car_model() << '\n';
+
+            cadena_traslado_2a3->insertar_carro(std::move(carro));
         }
     }
 }

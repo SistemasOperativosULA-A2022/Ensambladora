@@ -1,5 +1,6 @@
 #include <estacion1.hpp>
 #include <estacion2.hpp>
+#include <estacion3.hpp>
 #include <estacion4.hpp>
 #include <iostream>
 
@@ -8,6 +9,8 @@ static double M1 = 5;
 static double D1 = 2.5;
 static double M2 = 4.0;
 static double D2 = 1.5;
+static double M3 = 4.0;
+static double D3 = 1.5;
 static double M4 = 5.0;
 static double D4 = 2.0;
 
@@ -32,7 +35,9 @@ void consumer(std::shared_ptr<CadenaDeTraslado> cadena, std::shared_ptr<CadenaDe
 
 void observador(unsigned seed,
                 std::shared_ptr<CadenaDeTraslado> cadena_llegada,
-                std::shared_ptr<CadenaDeTraslado> cadena_traslado_1a2)
+                std::shared_ptr<CadenaDeTraslado> cadena_traslado_1a2,
+                std::shared_ptr<CadenaDeTraslado> cadena_traslado_2a3,
+                std::shared_ptr<CadenaDeTraslado> cadena_traslado_3a4)
 {
     std::mt19937 generador(seed);
     std::poisson_distribution<int> tiempo_llegada(L1);
@@ -48,21 +53,12 @@ void observador(unsigned seed,
 
         std::cout << "\n"
                   << cadena_traslado_1a2->obtener_log() << std::endl;
-        /*
-        if (proceso_estacion_2.joinable())
-            proceso_estacion_2.join();
 
-        std::cout << "\n" << cadena_traslado_2a3->mostrar_cadena(2) << std::endl;
+        std::cout << "\n"
+                  << cadena_traslado_2a3->obtener_log() << std::endl;
 
-        if (proceso_estacion_3.joinable())
-            proceso_estacion_3.join();
-
-        std::cout << "\n" << cadena_traslado_3a4->mostrar_cadena(3) << std::endl;
-
-        if (proceso_estacion_4.joinable())
-            proceso_estacion_4.join();
-        if (consumidor_cadena.joinable())
-            consumidor_cadena.join();*/
+        std::cout << "\n"
+                  << cadena_traslado_3a4->obtener_log() << std::endl;
     }
 }
 
@@ -75,22 +71,35 @@ int main(int argc, char const *argv[])
     auto cadena_traslado_2a3 = std::make_shared<CadenaDeTraslado>();
     auto cadena_traslado_3a4 = std::make_shared<CadenaDeTraslado>();
     auto estacion1 = Estacion1(seed, M1, D1, cadena_llegada, cadena_traslado_1a2);
-    // auto estacion2 = Estacion2(seed, M2, D2, cadena_traslado_1a2, cadena_traslado_2a3);
-    // auto estacion3 = Estacion3(seed, M3, D3, cadena_traslado_2a3, cadena_traslado_3a4);
-    // auto estacion4 = Estacion4(seed, M4, D4, cadena_traslado_3a4);
+    auto estacion2 = Estacion2(seed, M2, D2, cadena_traslado_1a2, cadena_traslado_2a3);
+    auto estacion3 = Estacion3(seed, M3, D3, cadena_traslado_2a3, cadena_traslado_3a4);
+    auto estacion4 = Estacion4(seed, M4, D4, cadena_traslado_3a4);
 
-    std::thread proceso_observador(&observador, seed, cadena_llegada, cadena_traslado_1a2);
+    std::thread proceso_observador(&observador,
+                                   seed,
+                                   cadena_llegada,
+                                   cadena_traslado_1a2,
+                                   cadena_traslado_2a3,
+                                   cadena_traslado_3a4);
     std::thread proceso_estacion_1(&Estacion1::worker, &estacion1);
-    // std::thread proceso_estacion_2(&Estacion2::worker, &estacion2);
-    // std::thread proceso_estacion_3(&Estacion3::worker, &estacion3);
-    // std::thread proceso_estacion_4(&Estacion4::worker, &estacion4);
-    std::thread consumidor_cadena(&consumer, cadena_traslado_1a2);
+    std::thread proceso_estacion_2(&Estacion2::ejecutar, &estacion2);
+    std::thread proceso_estacion_3(&Estacion3::worker, &estacion3);
+    std::thread proceso_estacion_4(&Estacion4::ejecutar, &estacion4);
 
     if (proceso_observador.joinable())
         proceso_observador.join();
 
     if (proceso_estacion_1.joinable())
         proceso_estacion_1.join();
+
+    if (proceso_estacion_2.joinable())
+        proceso_estacion_2.join();
+
+    if (proceso_estacion_3.joinable())
+        proceso_estacion_3.join();
+
+    if (proceso_estacion_4.joinable())
+        proceso_estacion_4.join();
 
     std::cout << "Para finalizar el programa: Ctrl+C to exit.\n";
 

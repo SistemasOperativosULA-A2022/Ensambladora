@@ -3,7 +3,7 @@ HEADER_PATH=./headers
 OUT_PATH=./bin
 VPATH=${SRC_PATH}
 
-FILES=cadena_traslado estacion1 carro estacion4 estacion2
+FILES=carro cadena_traslado estacion1 estacion2 estacion3 estacion4 
 
 SOURCES=$(FILES:%=$(SRC_PATH)/%.cpp)
 HEADERS=$(FILES:%=$(HEADER_PATH)/%.hpp)
