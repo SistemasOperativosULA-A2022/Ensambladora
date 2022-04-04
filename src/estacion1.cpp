@@ -30,6 +30,9 @@ Estacion1::Estacion1(
  */
 void Estacion1::worker()
 {
+    std::string comentario;
+    int var = 1;
+
     while (true)
     {
         auto intervalo_llegada = this->tiempo_llegada(this->generador);
@@ -42,7 +45,11 @@ void Estacion1::worker()
         std::this_thread::sleep_for(std::chrono::seconds(int(intervalo_procesamiento) + 1));
         
         auto carro = std::make_unique<Carro>(++id_counter);
-        std::cerr << "Creado carro con ID: " << carro->get_id() << std::endl;
+        std::cerr << "Asignar ID: " << carro->get_id() << std::endl;
         this->cadena_traslado->insertar_carro(std::move(carro));
+
+        comentario.append("Completado correctamente Estacion1");
+
+        this->cadena_traslado->conexion_cadena(comentario, var);
     }
 }

@@ -18,6 +18,8 @@ class CadenaDeTraslado
 private:
     std::queue<std::unique_ptr<Carro>> cadena_traslado;
     std::mutex mux;
+    unsigned long long produccion;
+    std::string cadena[3];
 
 public:
     CadenaDeTraslado() = default;
@@ -25,6 +27,9 @@ public:
 
     void insertar_carro(std::unique_ptr<Carro>);
     std::unique_ptr<Carro> obtener_carro_actual();
+    void conexion_cadena(std::string, int);
+    std::string mostrar_cadena(int);
+    unsigned long long get_produccion();
 };
 
 #endif // __CADENA_DE_TRASLADO_HEADER__

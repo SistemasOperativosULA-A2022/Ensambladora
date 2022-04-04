@@ -4,6 +4,7 @@ void CadenaDeTraslado::insertar_carro(std::unique_ptr<Carro> carro)
 {
     this->mux.lock();
     this->cadena_traslado.push(std::move(carro));
+    this->produccion++;
     this->mux.unlock();
 }
 
@@ -19,4 +20,19 @@ std::unique_ptr<Carro> CadenaDeTraslado::obtener_carro_actual()
     }
 
     return value;
+}
+
+void CadenaDeTraslado::conexion_cadena(std::string cadena, int var)
+{
+    this->cadena[var].append(cadena);
+}
+
+std::string CadenaDeTraslado::mostrar_cadena(int var)
+{
+    return this->cadena[var].data();
+}
+
+unsigned long long CadenaDeTraslado::get_produccion()
+{
+    return this->produccion;
 }
