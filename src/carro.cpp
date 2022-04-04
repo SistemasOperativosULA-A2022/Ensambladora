@@ -1,9 +1,4 @@
 #include <carro.hpp>
-
-Carro::Carro(long long id) : id{id}
-{
-}
-
 void Carro::set_volume(int volume)
 {
     this->mux.lock();

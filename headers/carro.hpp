@@ -23,11 +23,11 @@ private:
     std::mutex mux;
 
 public:
-    Carro() = delete;
+    Carro() = default;
     Carro(const Carro &) = delete;
-    Carro(long long);
     ~Carro() = default;
 
+    void set_id(long long);
     void set_volume(int);
     void set_num_doors(int);
     void set_color(int);

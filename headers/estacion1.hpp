@@ -18,13 +18,13 @@ class Estacion1
 private:
     std::mt19937 generador;
     std::normal_distribution<double> tiempo_procesamiento;
-    std::poisson_distribution<int> tiempo_llegada;
-    std::shared_ptr<CadenaDeTraslado> cadena_traslado;
-
+    std::shared_ptr<CadenaDeTraslado> cadena_llegada;
+    std::shared_ptr<CadenaDeTraslado> cadena_traslado1a2;
     unsigned long long id_counter;
 
 public:
-    Estacion1(unsigned, double, double, double, std::shared_ptr<CadenaDeTraslado>);
+    Estacion1(unsigned, double, double, std::shared_ptr<CadenaDeTraslado>,
+              std::shared_ptr<CadenaDeTraslado>);
     ~Estacion1() = default;
     Estacion1() = delete;
 
