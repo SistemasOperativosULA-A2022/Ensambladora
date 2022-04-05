@@ -18,6 +18,7 @@ private:
     std::mt19937 generador;
     std::normal_distribution<double> tiempo_procesamiento;
     std::shared_ptr<CadenaDeTraslado> cadena_traslado;
+    int prev_color;
 public:
     Estacion2() = default;
     Estacion2(double seed, double M2, double D2, std::shared_ptr<CadenaDeTraslado> c);
