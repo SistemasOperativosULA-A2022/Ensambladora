@@ -21,13 +21,13 @@ void consumidor(std::shared_ptr<CadenaDeTraslado> cadena)
         auto carro = std::move(cadena->obtener_carro_actual());
         if (carro != nullptr)
         {
-            std::cout << "\n---Se ha emsablado completamente un carro---" << std::endl;
-            std::cout << "El carro ID: " << carro->get_id() << " se ha emsablado con éxito!" << std::endl;
+            std::cout << "\n---Se ha ensamblado correctamente un carro---" << std::endl;
+            std::cout << "Carro ID: " << carro->get_id() << " ¡Listo para conducirlo!" << std::endl;
             std::cout << "Pintura: " << color[carro->get_color()] << std::endl;
             std::cout << "Modelo del carro: " << car_model[carro->get_car_model()] << std::endl;
             std::cout << "Motor: " << motor_model[carro->get_motor_model()] << std::endl;
             std::cout << "Asientos: " << seats_model[carro->get_seats_model()] << std::endl;
-            std::cout << "----------------------------------------------" << std::endl;
+            std::cout << "---------------------------------------------" << std::endl;
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
@@ -63,7 +63,6 @@ void observador(unsigned seed,
 
 int main(int argc, char const *argv[])
 {
-    int production = 0;
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     auto cadena_llegada = std::make_shared<CadenaDeTraslado>();
     auto cadena_traslado_1a2 = std::make_shared<CadenaDeTraslado>();
@@ -88,7 +87,7 @@ int main(int argc, char const *argv[])
     std::thread proceso_estacion_4(&Estacion4::ejecutar, &estacion4);
     std::thread proceso_consumidor(&consumidor, cadena_traslado_final);
 
-    std::cout << "¡Bienvenido! Para finalizar el programa: Ctrl+C to exit.\n";
+    std::cout << "¡Bienvenido a la Ensambladadora V! Para finalizar el programa: Ctrl+C to exit.\n";
 
     if (proceso_observador.joinable())
         proceso_observador.join();
@@ -107,8 +106,6 @@ int main(int argc, char const *argv[])
 
     if (proceso_consumidor.joinable())
         proceso_consumidor.join();
-
-    std::cout << "\nTotal de carros ensamblados completamente: " << production << std::endl;
 
     return 0;
 }

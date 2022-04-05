@@ -43,9 +43,8 @@ void Estacion2::ejecutar()
 
         double intervalo_procesamiento = tiempo_procesamiento(generador);
 
-        std::cerr << "Llego a la Estacion2 el carro con ID: " << carro->get_id() << '\n';
-        std::cerr << "Tiempo de procesamiento Estacion 2 " << carro->get_id() << ": " << intervalo_procesamiento << '\n';
-
+        std::cerr << "Llegó a la Estación2 carro ID = " << carro->get_id() << " . Asignando color y modelo en t = " << intervalo_procesamiento << std::endl;
+        
         std::this_thread::sleep_for(std::chrono::seconds(int(intervalo_procesamiento) + 1));
 
         carro->set_car_model(generador() % 2); // 0 es coupe, 1 es sedan
@@ -56,9 +55,9 @@ void Estacion2::ejecutar()
 
         prev_color = carro->get_color();
 
-        std::cerr << "Saliendo de la Estacion 2 el carro con ID: " << carro->get_id() << '\n';
+        std::cerr << "Saliendo de la Estacion2 el carro con ID: " << carro->get_id() << '\n';
 
-        cadena_traslado_2a3->insertar_log("Completado correctamente Estacion2 carro con ID: " + carro->get_id());
+        cadena_traslado_2a3->insertar_log("\nCompletado correctamente Estación2 carro con ID: " + carro->get_id());
         cadena_traslado_2a3->insertar_carro(std::move(carro));
     }
 }

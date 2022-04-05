@@ -41,16 +41,15 @@ void Estacion3::worker()
 
         double intervalo_procesamiento = tiempo_procesamiento(generador);
 
-        std::cerr << "Llego a la Estacion 3 el carro con ID: " << carro->get_id() << '\n';
-        std::cerr << "Tiempo de procesamiento Estacion 3 carro con ID " << carro->get_id() << ": " << intervalo_procesamiento << '\n';
-
+        std::cerr << "Llegó a la Estación3 carro ID = " << carro->get_id() << " . Asignando motor en t = " << intervalo_procesamiento << std::endl;
+        
         std::this_thread::sleep_for(std::chrono::seconds(int(intervalo_procesamiento) + 1));
 
         carro->set_motor_model(generador() % 4); // Se escoge entre motores desde 1.4 a 2.0
 
-        std::cerr << "Saliendo de la Estacion 3 el carro con ID:" << carro->get_id() << '\n';
+        std::cerr << "Saliendo de la Estación3 el carro con ID: " << carro->get_id() << '\n';
 
-        cadena_traslado_3a4->insertar_log("Completado correctamente Estacion 3 carro con ID: " + carro->get_id());
+        cadena_traslado_3a4->insertar_log("\nCompletado correctamente Estación3 carro con ID: " + carro->get_id());
         cadena_traslado_3a4->insertar_carro(std::move(carro));
     }
 }

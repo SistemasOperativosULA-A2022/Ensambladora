@@ -42,14 +42,14 @@ void Estacion1::worker()
 
         auto intervalo_procesamiento = this->tiempo_procesamiento(this->generador);
         intervalo_procesamiento = std::abs(intervalo_procesamiento);
-        std::cerr << "Tiempo de procesamiento en Estación1: " << intervalo_procesamiento << std::endl;
+        std::cerr << "Llegó a la Estación1 un carro, se asigna ID en t = " << intervalo_procesamiento << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(int(intervalo_procesamiento) + 1));
 
         counter++;
         carro->set_id(counter);
-        std::cerr << "Asignando ID al carro recibido: " << carro->get_id() << std::endl;
+        std::cerr << "Estación1 está asignando ID al carro recibido: " << carro->get_id() << std::endl;
 
-        this->cadena_traslado1a2->insertar_log("Completado correctamente Estacion1 carro con ID: " + carro->get_id());
+        this->cadena_traslado1a2->insertar_log("\nCompletado correctamente Estacion1 carro con ID: " + carro->get_id());
         this->cadena_traslado1a2->insertar_carro(std::move(carro));
     }
 }

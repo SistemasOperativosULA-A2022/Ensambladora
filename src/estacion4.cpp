@@ -43,16 +43,15 @@ void Estacion4::ejecutar()
 
         double intervalo_procesamiento = tiempo_procesamiento(generador);
 
-        std::cerr << "Llego a la Estacion 4 el carro con ID: " << carro->get_id() << '\n';
-        std::cerr << "Tiempo de procesamiento Estacion 4 carro con ID " << carro->get_id() << ": " << intervalo_procesamiento << '\n';
-
+        std::cerr << "Llegó a la Estación4 carro ID = " << carro->get_id() << " . Asignando asientos en t = " << intervalo_procesamiento << std::endl;
+        
         std::this_thread::sleep_for(std::chrono::seconds(int(intervalo_procesamiento) + 1));
 
         carro->set_seats_model(generador() % 2); // 0 son asientos de tela, 1 son asientos de cuero
 
-        this->cadena_traslado_final->insertar_log("Completado correctamente Estacion 4 carro con ID: " + carro->get_id());
+        this->cadena_traslado_final->insertar_log("Completado correctamente Estación4 carro con ID: " + carro->get_id());
 
-        std::cerr << "Saliendo de la Estacion 4 el carro con ID:" << carro->get_id() << '\n';
+        std::cerr << "Saliendo de la Estación4 el carro con ID: " << carro->get_id() << '\n';
 
         cadena_traslado_final->insertar_carro(std::move(carro));
     }
