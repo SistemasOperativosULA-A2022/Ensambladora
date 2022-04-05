@@ -70,10 +70,12 @@ int main(int argc, char const *argv[])
     auto cadena_traslado_1a2 = std::make_shared<CadenaDeTraslado>();
     auto cadena_traslado_2a3 = std::make_shared<CadenaDeTraslado>();
     auto cadena_traslado_3a4 = std::make_shared<CadenaDeTraslado>();
+    auto cadena_traslado_final = std::make_shared<CadenaDeTraslado>();
+    
     auto estacion1 = Estacion1(seed, M1, D1, cadena_llegada, cadena_traslado_1a2);
     auto estacion2 = Estacion2(seed, M2, D2, cadena_traslado_1a2, cadena_traslado_2a3);
     auto estacion3 = Estacion3(seed, M3, D3, cadena_traslado_2a3, cadena_traslado_3a4);
-    auto estacion4 = Estacion4(seed, M4, D4, cadena_traslado_3a4);
+    auto estacion4 = Estacion4(seed, M4, D4, cadena_traslado_3a4, cadena_traslado_final);
 
     std::thread proceso_observador(&observador,
                                    seed,

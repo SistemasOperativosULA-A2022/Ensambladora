@@ -10,6 +10,13 @@
 
 #include <mutex>
 
+const std::string color[11] = { "Negro", "Azul", "Marron", "Gris", 
+    "Verde", "Naranja", "Rosa", "Purpura", "Rojo", "Blanco", "Amarrillo" };
+
+const std::string car_model[2] = { "Coupe", "Sedan" };
+
+const std::string seats_model[2] = { "Tela", "Cuero" };
+
 const std::string motor_model[4] = { "1.4", "1.6", "1.8", "2.0" };
 
 class Carro

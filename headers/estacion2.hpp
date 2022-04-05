@@ -7,11 +7,6 @@
 
 #include <cadena_traslado.hpp>
 
-const std::string color[11] = { "Negro", "Azul", "Marron", "Gris", 
-    "Verde", "Naranja", "Rosa", "Purpura", "Rojo", "Blanco", "Amarrillo" };
-
-const std::string car_model[2] = { "Coupe", "Sedan" };
-
 class Estacion2
 {
 private:

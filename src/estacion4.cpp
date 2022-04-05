@@ -8,15 +8,18 @@
  * @param seed Semilla para el generador de numeros aleatorio
  * @param M4 Media 4
  * @param D4 Desviación Estandar 4 
- * @param carro Carro recibido desde la estacion 3
+ * @param c3a4 Cadena de traslado desde la estacion 3 a la estacion 4
+ * @param cf Cadena final de traslado
  */
 Estacion4::Estacion4(
     double seed, 
     double M4, 
     double D4, 
-    std::shared_ptr<CadenaDeTraslado> c) :  generador(seed), 
+    std::shared_ptr<CadenaDeTraslado> c3a4,
+    std::shared_ptr<CadenaDeTraslado> cf) :  generador(seed), 
                                             tiempo_procesamiento(M4, D4),
-                                            cadena_traslado(c)
+                                            cadena_traslado3a4(c3a4),
+                                            cadena_traslado_final(cf)
                                                             
 {
     // empty
@@ -31,7 +34,7 @@ void Estacion4::ejecutar()
 {
     while (true)
     {
-        auto carro = std::move(cadena_traslado->obtener_carro_actual());
+        auto carro = std::move(cadena_traslado3a4->obtener_carro_actual());
         
         if (carro != nullptr)
         {
@@ -44,7 +47,11 @@ void Estacion4::ejecutar()
             
             carro->set_seats_model(generador()%2); // 0 son asientos de tela, 1 son asientos de cuero
             
+            this->cadena_traslado_final->insertar_log("Completado correctamente Estacion 4 carro con ID: " + carro->get_id());
+            
             std::cerr << "Saliendo de la Estacion 4 el carro con ID:" << carro->get_id() << '\n';
+            
+            cadena_traslado_final->insertar_carro(std::move(carro));
         }
     }
 }
