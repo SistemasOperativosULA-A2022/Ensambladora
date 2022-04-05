@@ -10,6 +10,8 @@
 
 #include <mutex>
 
+const std::string motor_model[4] = { "1.4", "1.6", "1.8", "2.0" };
+
 class Carro
 {
 private:
@@ -42,8 +44,6 @@ public:
     int get_car_model();
     int get_motor_model();
     int get_seats_model();
-
-    
 };
 
 #endif //__CARRO_HEADER__
