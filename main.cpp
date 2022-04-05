@@ -51,18 +51,15 @@ void observador(unsigned seed,
         auto carro = std::make_unique<Carro>();
         cadena_llegada->insertar_carro(std::move(carro));
 
-        //if(cadena_traslado_1a2->obtener_log().empty())
-        std::cout << cadena_traslado_1a2->obtener_log() << std::endl;
+        if(cadena_traslado_1a2->obtener_log().empty())
+            std::cout << cadena_traslado_1a2->obtener_log() << std::endl;
 
-        std::cout << cadena_traslado_2a3->obtener_log() << std::endl;
+        if(cadena_traslado_2a3->obtener_log().empty())
+            std::cout << cadena_traslado_2a3->obtener_log() << std::endl;
 
-        std::cout << cadena_traslado_3a4->obtener_log() << std::endl;
+        if(cadena_traslado_3a4->obtener_log().empty())
+            std::cout << cadena_traslado_3a4->obtener_log() << std::endl;
     }
-}
-
-void linea_estacion1()
-{
-
 }
 
 int main(int argc, char const *argv[])
