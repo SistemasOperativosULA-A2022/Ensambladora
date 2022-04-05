@@ -19,6 +19,8 @@ private:
     std::normal_distribution<double> tiempo_procesamiento;
     std::shared_ptr<CadenaDeTraslado> cadena_traslado_1a2;
     std::shared_ptr<CadenaDeTraslado> cadena_traslado_2a3;
+    int prev_color;
+    
 public:
     Estacion2() = default;
     Estacion2(unsigned, double, double, std::shared_ptr<CadenaDeTraslado>, 

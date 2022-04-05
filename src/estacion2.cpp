@@ -18,7 +18,8 @@ Estacion2::Estacion2(
     std::shared_ptr<CadenaDeTraslado> c2a3) : generador(seed),
                                               tiempo_procesamiento(M2, D2),
                                               cadena_traslado_1a2(c1a2),
-                                              cadena_traslado_2a3(c2a3)
+                                              cadena_traslado_2a3(c2a3),
+                                              prev_color(-1)
 
 {
     // empty
@@ -34,7 +35,6 @@ void Estacion2::ejecutar()
     while (true)
     {
         auto carro = std::move(cadena_traslado_1a2->obtener_carro_actual());
-        // auto volumen = 600;
 
         if (carro != nullptr)
         {
@@ -45,14 +45,18 @@ void Estacion2::ejecutar()
 
             std::this_thread::sleep_for(std::chrono::seconds(int(intervalo_procesamiento) + 1));
 
-            carro->set_color(generador() % 11); // del 0 a 11 son los posibles colores que puede tener el carro
-            carro->set_car_model(1);
-            // carro->set_car_model(volumen > 900? 0 : 1); // 0 es coupe, 1 es sedan
+            carro->set_car_model(generador() % 2); // 0 es coupe, 1 es sedan
+            while(prev_color == carro->get_color()){
+                carro->set_color(generador() % 11); // del 0 a 11 son los posibles colores que puede tener el carro
+            }
+            
+            prev_color = carro->get_color();
 
             std::cerr << "Saliendo de la Estacion 2 el carro con ID: " << carro->get_id() << '\n';
 
             cadena_traslado_2a3->insertar_log("Completado correctamente Estacion2 carro con ID: " + carro->get_id());
             cadena_traslado_2a3->insertar_carro(std::move(carro));
+        
         }
     }
 }
