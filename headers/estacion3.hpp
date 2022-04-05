@@ -1,3 +1,10 @@
+/**
+ * @file estacion3.hpp
+ * @author Josmar Muñoz (josmaralejandro97@gmail.com)
+ * @version 0.1
+ * @date 2022-04-02
+ */
+
 #ifndef __ESTACION_3_HEADER__
 #define __ESTACION_3_HEADER__
 
@@ -5,6 +12,8 @@
 #include <random>
 #include <thread>
 #include <cadena_traslado.hpp>
+
+const std::string motor_model[4] = { "1.4", "1.6", "1.8", "2.0" };
 
 class Estacion3
 {

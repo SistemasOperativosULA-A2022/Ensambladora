@@ -42,8 +42,6 @@ public:
     int get_car_model();
     int get_motor_model();
     int get_seats_model();
-
-    
 };
 
 #endif //__CARRO_HEADER__
