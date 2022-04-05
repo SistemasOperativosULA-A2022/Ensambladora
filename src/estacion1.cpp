@@ -49,7 +49,7 @@ void Estacion1::worker()
         carro->set_id(counter);
         std::cerr << "Asignando ID al carro recibido: " << carro->get_id() << std::endl;
 
-        this->cadena_traslado1a2->insertar_carro(std::move(carro));
         this->cadena_traslado1a2->insertar_log("Completado correctamente Estacion1 carro con ID: " + carro->get_id());
+        this->cadena_traslado1a2->insertar_carro(std::move(carro));
     }
 }

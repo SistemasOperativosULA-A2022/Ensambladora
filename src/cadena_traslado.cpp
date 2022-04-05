@@ -33,10 +33,10 @@ std::string CadenaDeTraslado::obtener_log()
     std::string value = "";
     if (not this->logs.empty())
     {
-        this->mux.lock();
+        this->logs_mux.lock();
         value = this->logs.front();
         this->logs.pop();
-        this->mux.unlock();
+        this->logs_mux.unlock();
     }
 
     return value;
