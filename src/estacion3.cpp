@@ -33,23 +33,24 @@ void Estacion3::worker()
     while (true)
     {
         auto carro = std::move(cadena_traslado_2a3->obtener_carro_actual());
-        // auto volumen = 600;
-
-        if (carro != nullptr)
+        if (carro == nullptr)
         {
-            double intervalo_procesamiento = tiempo_procesamiento(generador);
-
-            std::cerr << "Llego a la Estacion 3 el carro con ID: " << carro->get_id() << '\n';
-            std::cerr << "Tiempo de procesamiento Estacion 3 carro con ID " << carro->get_id() << ": " << intervalo_procesamiento << '\n';
-
-            std::this_thread::sleep_for(std::chrono::seconds(int(intervalo_procesamiento) + 1));
-
-            carro->set_motor_model(generador() % 4); // Se escoge entre motores desde 1.4 a 2.0
-
-            std::cerr << "Saliendo de la Estacion 3 el carro con ID:" << carro->get_id() << '\n';
-
-            cadena_traslado_3a4->insertar_log("Completado correctamente Estacion3 carro con ID: " + carro->get_id());
-            cadena_traslado_3a4->insertar_carro(std::move(carro));
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            continue;
         }
+
+        double intervalo_procesamiento = tiempo_procesamiento(generador);
+
+        std::cerr << "Llego a la Estacion 3 el carro con ID: " << carro->get_id() << '\n';
+        std::cerr << "Tiempo de procesamiento Estacion 3 carro con ID " << carro->get_id() << ": " << intervalo_procesamiento << '\n';
+
+        std::this_thread::sleep_for(std::chrono::seconds(int(intervalo_procesamiento) + 1));
+
+        carro->set_motor_model(generador() % 4); // Se escoge entre motores desde 1.4 a 2.0
+
+        std::cerr << "Saliendo de la Estacion 3 el carro con ID:" << carro->get_id() << '\n';
+
+        cadena_traslado_3a4->insertar_log("Completado correctamente Estacion3 carro con ID: " + carro->get_id());
+        cadena_traslado_3a4->insertar_carro(std::move(carro));
     }
 }
