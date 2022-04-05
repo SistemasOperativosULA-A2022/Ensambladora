@@ -3,7 +3,7 @@
 #include <iostream>
 
 /**
- * @brief Construye una nueva Estacion 4
+ * @brief Construye una nueva Estacion 2
  *
  * @param seed Semilla para el generador de numeros aleatorio
  * @param M2 Media 2
@@ -44,7 +44,7 @@ void Estacion2::ejecutar()
         double intervalo_procesamiento = tiempo_procesamiento(generador);
 
         std::cerr << "Llego a la Estacion2 el carro con ID: " << carro->get_id() << '\n';
-        std::cerr << "Tiempo de procesamiento Estacion2 " << carro->get_id() << ": " << intervalo_procesamiento << '\n';
+        std::cerr << "Tiempo de procesamiento Estacion 2 " << carro->get_id() << ": " << intervalo_procesamiento << '\n';
 
         std::this_thread::sleep_for(std::chrono::seconds(int(intervalo_procesamiento) + 1));
 

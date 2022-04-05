@@ -14,19 +14,19 @@ static double D3 = 1.5;
 static double M4 = 5.0;
 static double D4 = 2.0;
 
-void consumer(std::shared_ptr<CadenaDeTraslado> cadena, std::shared_ptr<CadenaDeTraslado> cadena34)
+void consumidor(std::shared_ptr<CadenaDeTraslado> cadena)
 {
     while (true)
     {
-        auto carro = std::move(cadena34->obtener_carro_actual());
+        auto carro = std::move(cadena->obtener_carro_actual());
         if (carro != nullptr)
         {
             std::cout << "\n---Se ha emsablado completamente un carro---" << std::endl;
-            std::cout << "El carro ID: " << carro->get_id() << "se ha emsablado con éxito!" << std::endl;
-            std::cout << "Pintura: " << carro->get_volume() << std::endl;
-            std::cout << "Modelo del carro: " << carro->get_car_model() << std::endl;
-            std::cout << "Motor: " << carro->get_motor_model() << std::endl;
-            std::cout << "Asientos: " << carro->get_seats_model() << std::endl;
+            std::cout << "El carro ID: " << carro->get_id() << " se ha emsablado con éxito!" << std::endl;
+            std::cout << "Pintura: " << color[carro->get_color()] << std::endl;
+            std::cout << "Modelo del carro: " << car_model[carro->get_car_model()] << std::endl;
+            std::cout << "Motor: " << motor_model[carro->get_motor_model()] << std::endl;
+            std::cout << "Asientos: " << seats_model[carro->get_seats_model()] << std::endl;
             std::cout << "----------------------------------------------" << std::endl;
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -45,19 +45,18 @@ void observador(unsigned seed,
     while (true)
     {
         auto intervalo_llegada = tiempo_llegada(generador);
-        std::cerr << "Intervalo de llegada de un nuevo carro: " << intervalo_llegada << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(intervalo_llegada + 1));
 
         auto carro = std::make_unique<Carro>();
         cadena_llegada->insertar_carro(std::move(carro));
 
-        if(cadena_traslado_1a2->obtener_log().empty())
+        if (not cadena_traslado_1a2->obtener_log().empty())
             std::cout << cadena_traslado_1a2->obtener_log() << std::endl;
 
-        if(cadena_traslado_2a3->obtener_log().empty())
+        if (not cadena_traslado_2a3->obtener_log().empty())
             std::cout << cadena_traslado_2a3->obtener_log() << std::endl;
 
-        if(cadena_traslado_3a4->obtener_log().empty())
+        if (not cadena_traslado_3a4->obtener_log().empty())
             std::cout << cadena_traslado_3a4->obtener_log() << std::endl;
     }
 }
@@ -71,7 +70,7 @@ int main(int argc, char const *argv[])
     auto cadena_traslado_2a3 = std::make_shared<CadenaDeTraslado>();
     auto cadena_traslado_3a4 = std::make_shared<CadenaDeTraslado>();
     auto cadena_traslado_final = std::make_shared<CadenaDeTraslado>();
-    
+
     auto estacion1 = Estacion1(seed, M1, D1, cadena_llegada, cadena_traslado_1a2);
     auto estacion2 = Estacion2(seed, M2, D2, cadena_traslado_1a2, cadena_traslado_2a3);
     auto estacion3 = Estacion3(seed, M3, D3, cadena_traslado_2a3, cadena_traslado_3a4);
@@ -87,6 +86,7 @@ int main(int argc, char const *argv[])
     std::thread proceso_estacion_2(&Estacion2::ejecutar, &estacion2);
     std::thread proceso_estacion_3(&Estacion3::worker, &estacion3);
     std::thread proceso_estacion_4(&Estacion4::ejecutar, &estacion4);
+    std::thread proceso_consumidor(&consumidor, cadena_traslado_final);
 
     std::cout << "¡Bienvenido! Para finalizar el programa: Ctrl+C to exit.\n";
 
@@ -104,6 +104,9 @@ int main(int argc, char const *argv[])
 
     if (proceso_estacion_4.joinable())
         proceso_estacion_4.join();
+
+    if (proceso_consumidor.joinable())
+        proceso_consumidor.join();
 
     std::cout << "\nTotal de carros ensamblados completamente: " << production << std::endl;
 

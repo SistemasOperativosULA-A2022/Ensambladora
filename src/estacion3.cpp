@@ -18,7 +18,7 @@ Estacion3::Estacion3(
     std::shared_ptr<CadenaDeTraslado> c3a4) : generador(seed),
                                               tiempo_procesamiento(M3, D3),
                                               cadena_traslado_2a3(c2a3),
-                                              cadena_traslado_3a4(c2a3)
+                                              cadena_traslado_3a4(c3a4)
 {
     // empty
 }
@@ -50,7 +50,7 @@ void Estacion3::worker()
 
         std::cerr << "Saliendo de la Estacion 3 el carro con ID:" << carro->get_id() << '\n';
 
-        cadena_traslado_3a4->insertar_log("Completado correctamente Estacion3 carro con ID: " + carro->get_id());
+        cadena_traslado_3a4->insertar_log("Completado correctamente Estacion 3 carro con ID: " + carro->get_id());
         cadena_traslado_3a4->insertar_carro(std::move(carro));
     }
 }
