@@ -49,7 +49,7 @@ void Estacion4::ejecutar()
 
         carro->set_seats_model(generador() % 2); // 0 son asientos de tela, 1 son asientos de cuero
 
-        this->cadena_traslado_final->insertar_log("Completado correctamente Estación4 carro con ID: " + carro->get_id());
+        this->cadena_traslado_final->insertar_log("Completado correctamente Estación4 carro con ID: " + std::to_string(carro->get_id()));
 
         std::cerr << "Saliendo de la Estación4 el carro con ID: " << carro->get_id() << '\n';
 

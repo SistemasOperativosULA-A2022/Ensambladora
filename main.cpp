@@ -14,11 +14,26 @@ static double D3 = 1.5;
 static double M4 = 5.0;
 static double D4 = 2.0;
 
-void consumidor(std::shared_ptr<CadenaDeTraslado> cadena)
+void consumidor(std::shared_ptr<CadenaDeTraslado> cadena_final,
+                std::shared_ptr<CadenaDeTraslado> cadena_traslado_1a2,
+                std::shared_ptr<CadenaDeTraslado> cadena_traslado_2a3,
+                std::shared_ptr<CadenaDeTraslado> cadena_traslado_3a4)
 {
     while (true)
     {
-        auto carro = std::move(cadena->obtener_carro_actual());
+        auto temp_log = cadena_traslado_1a2->obtener_log();
+        if (not temp_log.empty())
+            std::cout << temp_log << std::endl;
+
+        temp_log = cadena_traslado_2a3->obtener_log();
+        if (not temp_log.empty())
+            std::cout << cadena_traslado_2a3->obtener_log() << std::endl;
+
+        temp_log = cadena_traslado_3a4->obtener_log();
+        if (not temp_log.empty())
+            std::cout << temp_log << std::endl;
+
+        auto carro = std::move(cadena_final->obtener_carro_actual());
         if (carro != nullptr)
         {
             std::cout << "\n---Se ha ensamblado correctamente un carro---" << std::endl;
@@ -34,10 +49,7 @@ void consumidor(std::shared_ptr<CadenaDeTraslado> cadena)
 }
 
 void observador(unsigned seed,
-                std::shared_ptr<CadenaDeTraslado> cadena_llegada,
-                std::shared_ptr<CadenaDeTraslado> cadena_traslado_1a2,
-                std::shared_ptr<CadenaDeTraslado> cadena_traslado_2a3,
-                std::shared_ptr<CadenaDeTraslado> cadena_traslado_3a4)
+                std::shared_ptr<CadenaDeTraslado> cadena_llegada)
 {
     std::mt19937 generador(seed);
     std::poisson_distribution<int> tiempo_llegada(L1);
@@ -49,15 +61,6 @@ void observador(unsigned seed,
 
         auto carro = std::make_unique<Carro>();
         cadena_llegada->insertar_carro(std::move(carro));
-
-        if (not cadena_traslado_1a2->obtener_log().empty())
-            std::cout << cadena_traslado_1a2->obtener_log() << std::endl;
-
-        if (not cadena_traslado_2a3->obtener_log().empty())
-            std::cout << cadena_traslado_2a3->obtener_log() << std::endl;
-
-        if (not cadena_traslado_3a4->obtener_log().empty())
-            std::cout << cadena_traslado_3a4->obtener_log() << std::endl;
     }
 }
 
@@ -77,15 +80,15 @@ int main(int argc, char const *argv[])
 
     std::thread proceso_observador(&observador,
                                    seed,
-                                   cadena_llegada,
-                                   cadena_traslado_1a2,
-                                   cadena_traslado_2a3,
-                                   cadena_traslado_3a4);
+                                   cadena_llegada);
     std::thread proceso_estacion_1(&Estacion1::worker, &estacion1);
     std::thread proceso_estacion_2(&Estacion2::ejecutar, &estacion2);
     std::thread proceso_estacion_3(&Estacion3::worker, &estacion3);
     std::thread proceso_estacion_4(&Estacion4::ejecutar, &estacion4);
-    std::thread proceso_consumidor(&consumidor, cadena_traslado_final);
+    std::thread proceso_consumidor(&consumidor, cadena_traslado_final,
+                                   cadena_traslado_1a2,
+                                   cadena_traslado_2a3,
+                                   cadena_traslado_3a4);
 
     std::cout << "¡Bienvenido a la Ensambladadora V! Para finalizar el programa: Ctrl+C to exit.\n";
 

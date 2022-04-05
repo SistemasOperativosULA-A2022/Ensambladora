@@ -49,7 +49,7 @@ void Estacion3::worker()
 
         std::cerr << "Saliendo de la Estación3 el carro con ID: " << carro->get_id() << '\n';
 
-        cadena_traslado_3a4->insertar_log("\nCompletado correctamente Estación3 carro con ID: " + carro->get_id());
+        cadena_traslado_3a4->insertar_log("\nCompletado correctamente Estación3 carro con ID: " + std::to_string(carro->get_id()));
         cadena_traslado_3a4->insertar_carro(std::move(carro));
     }
 }
